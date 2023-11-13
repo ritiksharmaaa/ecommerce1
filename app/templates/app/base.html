@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> dairy Product | {% block title  %}{% endblock title  %}</title>
+        <link rel="stylesheet" href="{% static 'app/css/all.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'app/css/bootstrap.css' %}" />
+        <link rel="stylesheet" href="{% static 'app/css/owl.carousel.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'app/css/style.css' %}" />
+       
+        {% block header-css %}{% endblock header-css %}
+        <script   language="JavaScript" type="text/javascript"  src="{% static 'app/js/jquery.js' %}"></script>
+        {% comment %} <script src="https://checkout.razorpay.com/v1/checkout.js"></script> {% endcomment %}
+    
+ 
+</head>
+<body>
+    
+   
+    {% include 'app/navbar.html' %}
+
+    {% block slider  %}{% endblock slider  %}
+    {% block information  %}{% endblock information  %}
+
+
+    
+    {% block main-content  %}{% endblock main-content  %}
+    {% block payment-gateway  %}{% endblock payment-gateway  %}
+    <br/> <br/>
+
+
+    <footer  class="p-5  my-5" style="background-color: #e3f2fd;"  >
+       Copyrigth © : 2023 || Developer by : RitikSharmaaa 
+       <div> 
+      <p> Dodla Dairy Ltd </p>
+CIN: L15209TG1995PLC020324
+8-2-293/82/A, 270/Q, Road No 10-C,
+Jubilee Hills, Hyderabad – 500 033.
+Telangana, India.
+Tel: +91 40 4546 7777
+</div>
+    </footer>
+
+{% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> {% endcomment %}
+{% comment %} <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> {% endcomment %}
+
+
+<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+<script scr="{% static 'app/js/all.min.js' %}"></script>
+<script src="{% static 'app/js/popper.js' %}"></script>
+<script scr="{% static 'app/js/owl.carousel.min.js' %}"></script>
+<script scr="{% static 'app/js/myscript.js' %}"></script>
+{% block add-scripts %}{% endblock add-scripts %}
+
+    
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends "../app/base.html" %}
+{% load static %}
+{% block title %} Profile {% endblock title %}
+{% block main-content %}
+<div class="container my-5" style="height : 100%  ;">
+    <div class="row">
+      <h3 style="font-family : sans-serif  ;">Welcome <span class="text-capitalize">{{request.user}}</span> </h3>
+   
+    <div class="col-sm-2 border-end">
+        <ul class="list-unstyled">
+            <li class="d-grid"><a href="{% url 'customer profile'%}" class="btn">Profile</a></li>
+            <li class="d-grid mt-2"><a href="{% url 'customer address'%}" class="btn btn-primary ">Address</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-8 offset-sm-2 "> 
+        <div>
+            
+            {% if messages %}
+            
+            {% for msg  in messages  %}
+            <h6 class=" fa-bold  alert alert-success  "> {{msg}}  </h6>
+            
+            {% endfor %}
+                
+                
+            {% endif %}
+            
+            
+        </div>
+    <div class="row">
+        
+        {% if add  %}
+            
+        
+            
+        
+        {% for ad  in add   %}
+        <div class="col-sm-5 shadow-lg border-end" style="margin-left : 12px ; margin-top : 12px ;">
+
+            <div class="card-body  p-4">
+                <h3> Address  - {{forloop.counter}}</h3><hr>
+                <p>Name :- {{ad.name}}</p>
+                <p>Locality :- {{ad.locality}}</p>
+                <p>Mobile :- {{ad.mobile}}</p>
+                <p>City :- {{ad.city}}</p>
+                <p>State :- {{ad.state}}</p>
+                <p>Zipcode :- {{ad.zipcode}}</p>
+                <p class="text-center"> </p>
+                <div class="d-flex">
+                    <a  style="font-family : Rajdhani  ; background-color : light ; border : 2px solid black ;" href="{% url 'update-address' ad.id %}" type="button" class="btn mx-5 "> Update </a>
+                    <form action="{% url 'delete-address' ad.id %}" method="delete" >
+                        
+                        <button  style="background-color : #26c6da ; font-family : Rajdhani ; border : 2px solid black ;" class="btn " type="submit">Delete</button>
+                    </form>
+                    
+                </div>
+               
+            </div>
+        </div>
+            
+        {% endfor %}
+        {% else %}
+        <h6 class=" fa-bold  alert alert-warning "> No Address  Available Please Add Your Address  - </h6>
+
+        {% endif %}
+
+            
+    </div>
+    </div>
+</div>
+</div>
+{% endblock main-content %}
+

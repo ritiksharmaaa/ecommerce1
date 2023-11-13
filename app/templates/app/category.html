@@ -1,0 +1,68 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title  %}Category{% endblock title  %}
+{% block main-content %}
+{% comment %} <h2 class="text-center  mt-3"> Category {{val}} </h2>
+ {% endcomment %}
+ <style>
+    .no-outline {
+        outline : none ;
+    }
+ </style>
+<div class="conatiner my-5 mx-4">
+    <div class="row">
+
+       
+        <div class="col-sm-3">
+            <div class="list-group">
+
+                {% for i  in title   %}
+                <a href="{% url 'catogorytitle' i.title  %}" class="list-group-item list-group-item-action" arial-current="true"> {{i.title}}</a>
+                    
+                {% endfor %}
+
+            </div>
+       
+            
+
+
+
+
+        </div>
+        <div class="col-sm-9">
+        
+            <div class="row">
+                
+                {% for j  in  pro  %}
+                <div class="col text-center mb-4 "> 
+                    
+                    {% if j.id %}
+                    <a href="{% url 'product-detail' j.id %}" class="btn" >
+                        
+                    
+                        
+                    <div>
+<img  class="no-outline "src="{{j.product_img.url}}"  alt=""/>
+<div class="fw-bold">{{j.title}}</div>
+<div class="fw-bold text-danger"> 
+    Rs.{{j.discount_price}} /- <small class="fw-light text-decoration-line-through">{{j.selling_price}}</small>
+</div>
+
+                    </div>    
+                    </a>
+                    {% endif %}
+                </div>
+                    
+                {% endfor %}
+                    
+            </div>
+
+
+        </div>
+
+    </div>
+
+  
+
+</div>
+{% endblock main-content %}

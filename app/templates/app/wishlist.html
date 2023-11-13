@@ -1,0 +1,80 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title  %} Cart {% endblock title  %}
+{% block main-content  %}
+
+<div class="container p-3 mb-5 " style="height : 100% ;">
+    
+    
+
+    <h2 class="text-center mb-4 fw-bold" style="font-family : Rajdhani "> Wishlist </h2>
+
+
+   
+
+
+{% if data  %}
+    
+
+
+    <div class="row">
+
+        <div class="col-sm-11 offset-sm-1 ">
+            <div class="card " style="">
+                <div class="card-body ">
+                    
+                    
+                    {% for item  in data   %}
+                    <div class="mt-4 border-bottom shadow-sm   ">
+                        <div class="d-flex  mb-4">
+                        
+                            <div class="p-4  ">
+                                <a  class="p-3" href="{% url 'product-detail' item.Product.id %}">
+
+                                    
+                                    <img src="{{item.Product.product_img.url}}" alt="" style="width : 200px ; height : 150px ;">
+                                </a>
+                            </div>
+                            <div class="  mx-4 ">
+                                <h5 style="font-family : Georgia ; "> {{item.Product.title}}</h5>
+                                <p>{{item.Product.discription|truncatewords:25}}</p>
+                                
+                                
+                                <div class="d-flex justify-content-between">
+                                    
+                                    <p style="height:22px; "><strong> Rs.{{item.Product.discount_price}} /-</strong> </p>
+                                    
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                        
+                    {% endfor %}
+                        
+                    
+                </div>
+            </div>
+        </div>
+
+{% else %}
+<div style="height : 100vh ;">
+
+    <h3 class="alert alert-warning text-center fw-bold p-2"> No Item in wishlist</h3>
+</div>
+    {% endif %}
+</div>
+</div>
+
+
+</div>
+
+
+
+</div>
+
+{% endblock main-content  %}
+
+

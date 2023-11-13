@@ -1,0 +1,121 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title  %} Category{% endblock title  %} Category
+{% block main-content  %}
+{% comment %} <h1> product details . {{data.id}}</h1>
+ {% endcomment %}
+
+ <div class="container ">
+    <div class="row flex justify-content-between " >
+        <div class="img2 col-lg-5 mt-5 "> 
+            <img src="{{data.product_img.url}}"  class="image col-xs-3  col-sm-12 col-lg-12 mt-3 text-sm-center w-100" alt="">
+        </div>
+        <div  class="productdetail col-lg-5 m-3">
+            <h1 style="font-family : Georgia ; font-size : 50px ;">{{data.title }} </h1>
+            <h5>Rs .{{data.discount_price}} <small class="text-decoration-line-through text-muted fs-5"><del> Rs . {{data.selling_price}} / - </del></small></h5> <br><br><h4  style="font-family : Rajdhani ; color ; black ; ">Product Feature </h4>
+            <ul class="fs-5" style="font-family : Rajdhani ;">
+            <li>{{data.discription}}</li>    
+            </ul>
+            <h4 style="font-family : Rajdhani ; color ; black ;">Product Composition  </h4>
+            <ul class="fs-5" style="font-family : Rajdhani ;">
+                <li>{{data.composition}}</li>    
+                </ul>
+                <h4 style="font-family : Rajdhani ; color ; #000; ">ProdApp </h4>
+                <ul class="fs-5" style="font-family : Rajdhani ;">
+                    <li>{{data.prodapp}}</li>    
+                    </ul>
+
+
+            
+            
+                
+                {% if request.user.is_authenticated  %}
+                    
+               
+                    
+                {% if item_already_in_cart %}
+                    
+                <a class="btn btn-warning shadow px-5 py-2 ms-4 border-black fw-bold "  href="{% url 'show cart' %}" class="text-decoration-none text-white "> Go To Cart  </a>
+                    
+               
+
+                {% else %}
+                 <form action="/add-to-cart" method="get"  class="d-inline">
+                    <input type="hidden" name="prod_id" value="{{data.id}}">
+                    <button type="submit" class=" btn btn-primary  shadow px-5 py-2 border-black fw-bold    gr     " value="prod_id"> Add To Cart </button>
+                </form>
+               {% endif %}
+
+
+                <a class="btn  border-black fw-bold  shadow px-5 py-2 fw-bold"  href="{% url 'show cart'%}" class="btn btn-warning shadow px-4 py-2 ms-4 "> Buy Now </a>
+                
+                {% if wishlist %}
+                
+                <a   pid={{data.id}} class="minus-wishlist btn btn-success  shadow px-4 py-2 ms-4 "> 🤍 </a>
+                {% else %}
+                <a  pid={{data.id}} class=" plus-wishlist btn btn-danger shadow px-4 py-2 ms-4 "> 🤍 </a>
+
+                {% endif %}
+                
+               
+    
+                {% else %}
+
+                
+                <form action="/add-to-cart" method="get"  class="d-inline">
+                    <input type="hidden" name="prod_id" value="{{data.id}}">
+                    <button type="submit" class=" btn btn-primary  shadow px-4 py-2 border-black fw-bold  " value="prod_id"> Add To Cart </button>
+                </form>
+                <a   href="{% url 'show cart'%}" class="btn btn-warning shadow px-4 py-2 ms-4 "> Buy Now </a>
+                
+                {% if wishlist %}
+                
+                <a   pid={{data.id}} class="minus-wishlist btn btn-success  shadow px-4 py-2 ms-4 "> 🤍 </a>
+                {% else %}
+                <a  pid={{data.id}} class=" plus-wishlist btn btn-danger shadow px-4 py-2 ms-4 "> 🤍 </a>
+
+                {% endif %}
+                
+
+                {% endif %}
+                
+                    
+            
+        </div>
+    </div>
+    <script type="text/javascript">
+        
+$('.plus-wishlist').click(function(){
+    console.log(" wishlist click plush ")
+    var id=$(this).attr("pid").toString();
+    $.ajax({
+        type:"GET",
+        url:"/pluswishlist",
+        data:{
+            prod_id:id
+        },
+        success:function(data){
+            //alert(data.message)
+            window.location.href = `http://localhost:8000/product/${id}`
+        }
+    })
+})
+
+
+$('.minus-wishlist').click(function(){
+    console.log(" wishlist click minus  ")
+    var id=$(this).attr("pid").toString();
+    $.ajax({
+        type:"GET",
+        url:"/minuswishlist",
+        data:{
+            prod_id:id
+        },
+        success:function(data){
+            window.location.href = `http://localhost:8000/product/${id}`
+        }
+    })
+})
+    </script>
+ </div>
+{% endblock main-content  %}

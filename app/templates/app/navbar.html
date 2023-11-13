@@ -1,0 +1,154 @@
+
+{% load static %}
+
+<style>
+  /* Remove the border */
+input[type="search"] {
+  border: none;
+  outline: none; /* Optional: Remove the outline when the input is focused */
+}
+
+/* Remove the clear button in Chrome, Safari, and Edge */
+input[type="search"]::-webkit-search-clear-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove the clear button in Firefox */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-clear-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Remove the clear button in IE 10 and IE 11 */
+input[type="search"]::-ms-clear {
+  display: none;
+}
+
+/* Remove the inner padding in Firefox and Edge */
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* Remove the inner padding in Safari */
+input[type="search"]::-webkit-search-inner-box {
+  padding: 0;
+}
+
+/* Remove the inner padding in IE 10 and IE 11 */
+input[type="search"] {
+  padding: 0;
+}
+
+</style>
+
+<nav class="navbar  navbar-light navbar-expand-lg navbar-light " style="background-color: #e3f2fd;"">
+  <div class="container-fluid" style="height : 50px ;">
+    <a class="navbar-brand" href="/">
+      <img src="{% static 'app/images/l.png'%}" alt="logo" width="100px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: #e3f2fd;">
+            <li><a class="dropdown-item" href="{% url 'catogory' 'ML'  %}">Milk</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'CR'  %}">Curd</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'LS'  %}">Lassi</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'GH'  %}">Gheer</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'PN'  %}">Paneer</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'CH'  %}">Cheese</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'Ic'  %}">Ice Creams</a></li>
+            <li><a class="dropdown-item" href="{% url 'catogory' 'MS'  %}">Milk Shake </a></li>
+           
+          </ul>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{%  url 'about-page' %}">About Us </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'contact-page' %}" tabindex="-1" >Contact Us </a>
+        </li>
+      </ul>
+
+      <form  action="/search" class="d-flex mx-5" style="border : .5px solid black ;  border-radius : 5px 0 0  5px ;" >
+        <input class="" style="border : none  ; border-radius : 5px 0 0 5px ; padding : 10px 23px ; width : 25em  " type="search" name="query" placeholder="Search" aria-label="Search" value="{{query}}"">
+        <button style="border : none ; padding : 5px 20px  ; ; background-color : light ; ;" type="submit"><svg  width="30" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" focusable="false" style="pointer-events: none; display: block; width: 100%; height: 100%;"><path d="m20.87 20.17-5.59-5.59C16.35 13.35 17 11.75 17 10c0-3.87-3.13-7-7-7s-7 3.13-7 7 3.13 7 7 7c1.75 0 3.35-.65 4.58-1.71l5.59 5.59.7-.71zM10 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"></path></svg>
+        </button>
+      </form>
+    </div>
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item dropdown mx-2">
+        <a class="nav-link dropdown-toggle text-black " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{request.user}} 
+        </a>
+        <ul class="dropdown-menu p-23px " aria-labelledby="navbarDropdown" style="background-color: #e3f2fd;">
+          
+          {% if request.user.is_authenticated  %}
+          <li><a class="dropdown-item m-2 " href="{% url 'ordered_page' %}">
+            Orders</a></li>
+              
+            <li><a class="dropdown-item m-2 " href="{% url 'customer profile'%}">Profile</a></li>
+            <li><a class="dropdown-item m-2 " href="{% url 'password-change' %}">Change Password </a></li>
+            <li><a class="dropdown-item m-2 " href="{% url 'logout' %}">Logout  </a></li>
+            {% endif %}
+              
+            <li><a class="dropdown-item m-2 " href="#">Help Center </a></li>
+            <li><a class="dropdown-item m-2 " href="#">Terms ,Policies and Licenses </a></li>
+            
+            
+          </ul>
+        </li>
+        {% if request.user.is_authenticated  %}
+        <li class="nav-item mx-2">
+        <a href="{% url 'show cart' %}" class="nav-link text-black ">
+          {% if totalitem > 0  %}
+          <span style="font-size : 8px ;" class="badge bg-danger">
+        {{totalitem}}
+          
+      </span>
+        {% endif %}
+           Cart </a>
+      </li>
+      <li class="nav-item mx-2">
+        <a href="{% url 'wishlist' %}" class="nav-link text-black ">{% if totalwishlist > 0  %}
+          <span style="font-size : 8px ;" class="badge bg-danger">
+        {{totalwishlist}}
+          
+      </span>
+        {% endif %}❤️</a>
+      </li>
+      
+      {% else %}
+      
+      
+      <li class="nav-item mx-2">
+        <a href="{% url 'login'%}" class="nav-link text-black ">LogIn  </a>
+      </li>
+        
+    
+        
+      <li class="nav-item mx-2">
+        <a href="{% url 'registration' %}" class="nav-link text-black ">Register   </a>
+      </li>
+      {% endif %}
+        
+
+    </ul>
+  </div>
+</nav>
+
+  <!-- Navbar content -->
+

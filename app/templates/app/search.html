@@ -1,0 +1,109 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title  %} Search {% endblock title  %}
+{% block header-css %}
+<link rel="stylesheet" href="{% static 'app/css/card.css' %}" />
+{% endblock header-css %}
+{% block main-content  %}
+<div class="" >
+    
+<div class="container">
+
+    
+    {% if product  %}
+        
+    
+        
+ 
+    <div class="products-container">
+ 
+ {% for item  in product  %}
+    
+    
+       <div class="product" data-name="p-{{forloop.counter}}">
+          <img src="{{item.product_img.url}}" alt="">
+          <h3>{{item.title}}-{{forloop.counter}}</h3>
+          <div class="price"> Rs {{item.discount_price}} /- <span class="text-decoration-line-through text-danger" > {{item.selling_price}}</span></div>
+       </div>
+       
+ {% endfor %}
+ 
+ 
+ </div>
+ 
+ <div class="products-preview">
+ 
+ {% for item  in product  %}
+    
+
+    
+    <div class="preview" data-target="p-{{forloop.counter}}">
+       {% comment %} <i class="fas fa-times"></i> {% endcomment %}
+       <div class="">
+        <svg  class="fas fa-times" width="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"></path></svg>
+         </div>
+       <img src="{{item.product_img.url}}" alt="">
+       <h3>{{item.title}}</h3>
+       <div class="stars">
+        <span>⭐</span>
+        <span>⭐</span>
+        <span>⭐</span>
+        <span>⭐</span>
+
+          <span>( 250 )</span>
+       </div>
+       <p>{{item.discription|truncatewords:15}}</p>
+       <div class="price">Rs {{item.discount_price}} /- <span class="text-decoration-line-through text-danger" > {{item.selling_price}}</span></div>
+       <div class="buttons">
+          <a href="{% url 'show cart' %}" class="buy">buy now</a>
+          <a pid={{item.id}}  style="cursor : pointer ;" class=" hover-add-to-cart cart">add to cart</a>
+       </div>
+    </div>
+    {% endfor %}
+ 
+ 
+ </div>
+
+ {% else %}
+
+ <h3 class="alert alert-danger text-center  " style="font-family : Rajdhani  ;" > No product found </h3>
+ {% endif %}
+ <script type="text/javascript">
+   $(".hover-add-to-cart").click(function(){
+      try {
+         console.log("I am click from hoverable button search");
+         const id = $(this).attr("pid").toString();
+         console.log(id);
+
+         $.ajax({
+            type:"GET",
+            url:"/add-to-cart",
+            data:{
+                prod_id:id
+            },
+            success:function(data){
+               
+                const url = `http://localhost:8000/add-to-cart?prod_id=${id}`;
+                window.location.href = url;
+            }
+        })
+
+         // Construct the URL using template literals
+
+         // Redirect to the constructed URL
+        
+      } catch (error) {
+         console.error("An error occurred:", error);
+         // Handle the error (e.g., show an error message to the user)
+      }
+   });
+</script>
+
+
+ {% block add-scripts  %} 
+ 
+<script src="{% static 'app/js/card.js' %}"></script>
+ {% endblock add-scripts  %}
+ 
+ 
+</div>{% endblock main-content  %}

@@ -1,0 +1,32 @@
+{% extends 'app/base.html' %}
+{% block title  %} Payment failed {% endblock title  %}
+{% block main-content %}
+<div class="container mt-5">
+        <h1 class="text-danger">Payment Failed</h1>
+        
+        <p class="alert alert-danger">
+            <strong>Error Code:</strong> {{ error_code }}
+        </p>
+        <p class="alert alert-danger">
+            <strong>Error Description:</strong> {{ error_description }}
+        </p>
+        <p class="alert alert-danger">
+            <strong>Error Source:</strong> {{ error_source }}
+        </p>
+        <p class="alert alert-danger">
+            <strong>Error Step:</strong> {{ error_step }}
+        </p>
+        <p class="alert alert-danger">
+            <strong>Error Reason:</strong> {{ error_reason }}
+        </p>
+        <p class="alert alert-danger">
+            <strong>Order ID:</strong> {{ order_id }}
+        </p>
+        <p class="alert alert-danger">
+            <strong>Payment ID:</strong> {{ payment_id }}
+        </p>
+
+        <!-- Add any additional content or styling as needed -->
+    </div>
+
+{% endblock main-content %}
