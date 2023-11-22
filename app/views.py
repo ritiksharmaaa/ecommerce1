@@ -113,7 +113,7 @@ def about_page(request):
 
 
 
-@login_required()
+@login_required
 def add_to_cart(request):
     user = request.user
     product_id  = request.GET.get("prod_id")

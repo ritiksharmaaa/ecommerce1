@@ -13,7 +13,39 @@
         {% block header-css %}{% endblock header-css %}
         <script   language="JavaScript" type="text/javascript"  src="{% static 'app/js/jquery.js' %}"></script>
         {% comment %} <script src="https://checkout.razorpay.com/v1/checkout.js"></script> {% endcomment %}
-    
+    <style>
+        /* Hide the scrollbar on the right side */
+body::-webkit-scrollbar {
+    width: 0.5em; /* Adjust the width as needed */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Set the color of the thumb to transparent */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: transparent; /* Set the color of the track to transparent */
+}
+
+/* For Firefox */
+body {
+    scrollbar-width: none ; /* Adjust the width as needed */
+}
+
+body::-moz-scrollbar {
+    width: 0 ; /* Adjust the width as needed */
+}
+
+body::-moz-scrollbar-thumb {
+    background-color: transparent; /* Set the color of the thumb to transparent */
+}
+
+body::-moz-scrollbar-track {
+    background-color: transparent; /* Set the color of the track to transparent */
+}
+
+        
+    </style>
  
 </head>
 <body>

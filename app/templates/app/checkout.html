@@ -106,14 +106,14 @@
     };
     var rzp1 = new Razorpay(options);
     rzp1.on('payment.failed', function (response){
-        alert("Payment failed");
+        {% comment %} alert("Payment failed");
         alert("Error Code: " + response.error.code);
         alert("Error Description: " + response.error.description);
         alert("Error Source: " + response.error.source);
         alert("Error Step: " + response.error.step);
         alert("Error Reason: " + response.error.reason);
         alert("Order ID: " + response.error.metadata.order_id);
-        alert("Payment ID: " + response.error.metadata.payment_id);
+        alert("Payment ID: " + response.error.metadata.payment_id); {% endcomment %}
 
         // redirect to new url 
          const newHref = `http://localhost:8000/paymentfailed?error_code=${response.error.code}&error_description=${response.error.description}&error_source=${response.error.source}&error_step=${response.error.step}&error_reason=${response.error.reason}&order_id=${response.error.metadata.order_id}&payment_id=${response.error.metadata.payment_id}`;
